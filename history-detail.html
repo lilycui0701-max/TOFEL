@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session Review | TOEFL Speaking Practice Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="card page-header">
+        <div class="page-nav">
+          <a href="index.html" class="btn btn-secondary nav-link">Home</a>
+          <a href="history.html" class="btn btn-secondary nav-link">Back to History</a>
+          <a href="practice.html" class="btn btn-secondary nav-link">Practice Page</a>
+        </div>
+        <p class="eyebrow">Saved Session Review</p>
+        <h1 id="detailTitle">Practice Session</h1>
+        <p class="intro" id="detailTimestamp"></p>
+      </section>
+
+      <section id="detailEmpty" class="card analysis-card hidden">
+        <div class="analysis-empty">
+          We could not find that practice session. Return to History and choose another item.
+        </div>
+      </section>
+
+      <section id="detailContent" class="detail-stack hidden">
+        <section class="card analysis-card">
+          <div class="analysis-block">
+            <p class="section-label">Question</p>
+            <p id="detailQuestion" class="analysis-copy"></p>
+          </div>
+        </section>
+
+        <section class="card analysis-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Original Recording</p>
+              <h2>Listen to your saved response</h2>
+            </div>
+          </div>
+          <div id="detailAudioEmpty" class="analysis-empty">
+            No saved recording is available for this session.
+          </div>
+          <div id="detailAudioContent" class="audio-review hidden">
+            <audio id="detailAudioPlayer" controls preload="metadata"></audio>
+            <p class="status-text status-detail">
+              Use the player to compare your original recording with the transcript and feedback below.
+            </p>
+          </div>
+        </section>
+
+        <section class="card analysis-card">
+          <div class="analysis-block">
+            <p class="section-label">Transcript</p>
+            <p id="detailTranscript" class="analysis-copy"></p>
+          </div>
+          <div class="score-grid detail-score-grid">
+            <div class="score-pill">
+              <span>Content</span>
+              <strong id="detailContentScore">-</strong>
+            </div>
+            <div class="score-pill">
+              <span>Organization</span>
+              <strong id="detailOrganizationScore">-</strong>
+            </div>
+            <div class="score-pill">
+              <span>Fluency</span>
+              <strong id="detailFluencyScore">-</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="card analysis-card">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Self Rating</p>
+              <h2>Your own review</h2>
+            </div>
+          </div>
+          <div class="score-grid detail-score-grid">
+            <div class="score-pill score-pill-soft">
+              <span>Content</span>
+              <strong id="detailSelfContent">-</strong>
+            </div>
+            <div class="score-pill score-pill-soft">
+              <span>Organization</span>
+              <strong id="detailSelfOrganization">-</strong>
+            </div>
+            <div class="score-pill score-pill-soft">
+              <span>Fluency</span>
+              <strong id="detailSelfFluency">-</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="card analysis-card">
+          <div class="analysis-grid">
+            <div class="analysis-block">
+              <p class="section-label">Strengths</p>
+              <ul id="detailStrengths" class="analysis-list"></ul>
+            </div>
+            <div class="analysis-block">
+              <p class="section-label">Suggestions</p>
+              <ul id="detailSuggestions" class="analysis-list"></ul>
+            </div>
+          </div>
+          <div class="analysis-block">
+            <p class="section-label">Better Structure</p>
+            <ul id="detailStructure" class="analysis-list"></ul>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="history-detail.js"></script>
+  </body>
+</html>

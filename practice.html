@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practice | TOEFL Speaking Practice Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero card">
+        <div class="page-nav">
+          <p class="eyebrow">TOEFL Speaking Practice Lab</p>
+          <a href="index.html" class="btn btn-secondary nav-link">Home</a>
+        </div>
+        <h1>Build confidence with one guided speaking round</h1>
+        <div class="question-box">
+          <div class="question-box-header">
+            <div>
+              <p class="section-label">TOEFL speaking question bank</p>
+              <p class="question-counter" id="questionCounter">Question 1 of 20</p>
+            </div>
+            <button id="nextQuestionBtn" class="btn btn-secondary" type="button">
+              Next Question
+            </button>
+          </div>
+          <p class="question-text" id="questionText"></p>
+        </div>
+      </section>
+
+      <section class="grid-layout">
+        <div class="card">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Practice Timer</p>
+              <h2>Follow the TOEFL-style timing</h2>
+            </div>
+            <span id="phaseBadge" class="phase-badge">Ready</span>
+          </div>
+
+          <div class="timer-panel">
+            <div class="time-display" aria-live="polite">
+              <span id="timeValue">15</span>
+              <span class="time-unit">seconds</span>
+            </div>
+            <div class="phase-info">
+              <p class="phase-title" id="phaseTitle">Preparation Time</p>
+              <p class="phase-copy hidden" id="phaseCopy"></p>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button id="startPracticeBtn" class="btn btn-primary" type="button">
+              Start Practice
+            </button>
+            <button id="resetPracticeBtn" class="btn btn-secondary" type="button">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="section-heading">
+            <div>
+              <p class="section-label">Speech Practice</p>
+              <h2>Speak, transcribe, and analyze</h2>
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button id="startRecordingBtn" class="btn btn-primary" type="button">
+              Start Recording
+            </button>
+            <button
+              id="stopRecordingBtn"
+              class="btn btn-secondary"
+              type="button"
+              disabled
+            >
+              Stop Recording
+            </button>
+          </div>
+
+          <div class="button-row analysis-actions">
+            <button
+              id="analyzeBtn"
+              class="btn btn-primary"
+              type="button"
+              disabled
+            >
+              Analyze My Response
+            </button>
+          </div>
+
+          <p id="recordingStatus" class="status-text" aria-live="polite">
+            Speech capture is idle. Press start when you are ready.
+          </p>
+          <p id="analysisStatus" class="status-text status-detail" aria-live="polite">
+            Speak a response to unlock Gemini analysis.
+          </p>
+
+          <div class="audio-wrapper">
+            <label class="section-label" for="transcriptPreview">Live Transcript</label>
+            <p id="transcriptPreview" class="analysis-copy"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card recording-review-card">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Recording Review</p>
+            <h2>Replay your speaking response</h2>
+          </div>
+        </div>
+        <div id="recordingReviewEmpty" class="analysis-empty">
+          No recording is available yet. Complete a speaking round to review your audio here.
+        </div>
+        <div id="recordingReviewContent" class="audio-review hidden">
+          <audio id="recordingReviewPlayer" controls preload="metadata"></audio>
+          <p id="recordingReviewHint" class="status-text status-detail">
+            Replay your recording as many times as you need while reviewing your feedback.
+          </p>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Reflection Notes</p>
+            <h2>Review what you said</h2>
+          </div>
+        </div>
+
+        <div class="reflection-grid">
+          <label class="field-group">
+            <span>What is my main opinion?</span>
+            <textarea
+              id="opinionInput"
+              rows="4"
+              placeholder="Write your main answer in one clear sentence."
+            ></textarea>
+          </label>
+
+          <label class="field-group">
+            <span>What are my two supporting points?</span>
+            <textarea
+              id="supportInput"
+              rows="4"
+              placeholder="List two reasons or examples that support your opinion."
+            ></textarea>
+          </label>
+
+          <label class="field-group">
+            <span>What part was unclear?</span>
+            <textarea
+              id="unclearInput"
+              rows="4"
+              placeholder="Note any sentence, transition, or idea that needs improvement."
+            ></textarea>
+          </label>
+        </div>
+
+        <div class="reflection-actions">
+          <button id="generateFeedbackBtn" class="btn btn-primary" type="button">
+            Generate Feedback
+          </button>
+        </div>
+
+        <div class="feedback-box" id="feedbackBox" aria-live="polite">
+          <p class="section-label">Feedback Box</p>
+          <p id="feedbackText">
+            Fill in your reflection notes, then generate simple teacher-style
+            feedback here.
+          </p>
+        </div>
+      </section>
+
+      <section class="tip-card sticky-note">
+        <p class="section-label">Useful Speaking Structure</p>
+        <div class="structure-template">
+          <div class="structure-step">
+            <p class="structure-title">1. State your opinion clearly</p>
+            <p class="structure-copy">
+              Start with one direct answer so the listener immediately knows your position.
+            </p>
+            <p class="structure-starter">Sentence starter: “I strongly prefer ... because ...”</p>
+          </div>
+          <div class="structure-step">
+            <p class="structure-title">2. Give your first reason and a short example</p>
+            <p class="structure-copy">
+              Support your opinion with one concrete reason, then add a brief personal or realistic example.
+            </p>
+            <p class="structure-starter">Sentence starter: “My first reason is ... For example, ...”</p>
+          </div>
+          <div class="structure-step">
+            <p class="structure-title">3. Add a second reason with another example</p>
+            <p class="structure-copy">
+              Keep your second point different from the first so your answer sounds balanced and complete.
+            </p>
+            <p class="structure-starter">Sentence starter: “Another important reason is ... For instance, ...”</p>
+          </div>
+          <div class="structure-step">
+            <p class="structure-title">4. Finish with a concise conclusion</p>
+            <p class="structure-copy">
+              End with one short final sentence that restates your opinion confidently.
+            </p>
+            <p class="structure-starter">Sentence starter: “For these reasons, I believe ...”</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card analysis-card" id="analysisResultsCard">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">AI Speaking Feedback</p>
+            <h2>Transcript and TOEFL-style scoring</h2>
+          </div>
+        </div>
+
+        <div class="analysis-empty" id="analysisEmpty">
+          Your transcript and AI feedback will appear after you record and click
+          <strong>Analyze My Response</strong>.
+        </div>
+
+        <div class="analysis-results hidden" id="analysisResults">
+          <div class="analysis-block">
+            <p class="section-label">Transcript</p>
+            <p id="transcriptOutput" class="analysis-copy"></p>
+          </div>
+
+          <div class="score-grid">
+            <div class="score-pill">
+              <span>Content</span>
+              <strong id="contentScore">-</strong>
+            </div>
+            <div class="score-pill">
+              <span>Organization</span>
+              <strong id="organizationScore">-</strong>
+            </div>
+            <div class="score-pill">
+              <span>Fluency</span>
+              <strong id="fluencyScore">-</strong>
+            </div>
+          </div>
+
+          <div class="analysis-grid">
+            <div class="analysis-block">
+              <p class="section-label">Strengths</p>
+              <ul id="strengthsList" class="analysis-list"></ul>
+            </div>
+            <div class="analysis-block">
+              <p class="section-label">Suggestions For Improvement</p>
+              <ul id="suggestionsList" class="analysis-list"></ul>
+            </div>
+          </div>
+
+          <div class="analysis-block">
+            <p class="section-label">Better Sample Structure</p>
+            <ul id="structureList" class="analysis-list"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">Self Rating</p>
+            <h2>Score your response from 1 to 5</h2>
+          </div>
+        </div>
+
+        <div class="ratings-grid">
+          <fieldset class="rating-card">
+            <legend>Content</legend>
+            <p>Did I answer the question clearly with relevant ideas?</p>
+            <div class="rating-options">
+              <label><input type="radio" name="content" value="1" />1</label>
+              <label><input type="radio" name="content" value="2" />2</label>
+              <label><input type="radio" name="content" value="3" />3</label>
+              <label><input type="radio" name="content" value="4" />4</label>
+              <label><input type="radio" name="content" value="5" />5</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="rating-card">
+            <legend>Organization</legend>
+            <p>Did my answer have a clear structure from start to finish?</p>
+            <div class="rating-options">
+              <label><input type="radio" name="organization" value="1" />1</label>
+              <label><input type="radio" name="organization" value="2" />2</label>
+              <label><input type="radio" name="organization" value="3" />3</label>
+              <label><input type="radio" name="organization" value="4" />4</label>
+              <label><input type="radio" name="organization" value="5" />5</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="rating-card">
+            <legend>Fluency</legend>
+            <p>Did I speak smoothly with good pacing and few long pauses?</p>
+            <div class="rating-options">
+              <label><input type="radio" name="fluency" value="1" />1</label>
+              <label><input type="radio" name="fluency" value="2" />2</label>
+              <label><input type="radio" name="fluency" value="3" />3</label>
+              <label><input type="radio" name="fluency" value="4" />4</label>
+              <label><input type="radio" name="fluency" value="5" />5</label>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="reflection-actions">
+          <button id="saveSelfRatingBtn" class="btn btn-primary" type="button" disabled>
+            Save Self Rating
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
